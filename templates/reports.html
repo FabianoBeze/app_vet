@@ -1,0 +1,103 @@
+{% extends "base.html" %}
+
+{% block title %}Relatórios - Vet App{% endblock %}
+
+{% block content %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/reports.css') }}">
+
+<div class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1>Relatórios de Atendimentos Concluídos</h1>
+        <a href="{{ url_for('main.dashboard') }}" class="btn btn-secondary">Voltar para o Dashboard</a>
+    </div>
+    <hr>
+
+    {% if user.role == 'admin' %}
+        <h2 class="mb-3">Relatório Geral por Clínica</h2>
+        {% for clinic in clinics_data %}
+            <div class="report-section card mb-4">
+                <div class="card-header">
+                    <h3>{{ clinic.name }}</h3>
+                </div>
+                <div class="card-body">
+                    {% if clinic.animals %}
+                        <div class="table-responsive">
+                            <table class="table table-striped table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>Animal</th>
+                                        <th>Espécie</th>
+                                        <th>Tutor</th>
+                                        <th>Procedimento</th>
+                                        <th>Data Agendamento</th>
+                                        <th>Token</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for animal in clinic.animals %}
+                                    <tr>
+                                        <td>{{ animal.nome }}</td>
+                                        <td>{{ animal.especie }}</td>
+                                        <td>{{ animal.dono.username if animal.dono else 'N/A' }}</td>
+                                        <td>{{ animal.procedimento }}</td>
+                                        <td>{{ animal.agendamento }}</td>
+                                        <td>{{ animal.verification_token if animal.verification_token else '-' }}</td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    {% else %}
+                        <div class="alert alert-info" role="alert">
+                            Nenhum atendimento concluído para esta clínica.
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        {% else %}
+            <div class="alert alert-info" role="alert">
+                Nenhum atendimento concluído registrado.
+            </div>
+        {% endfor %}
+
+    {% elif user.role == 'clinic' %}
+        <h2 class="mb-3">Relatório da Clínica: {{ clinic_data.name if clinic_data else '—' }}</h2>
+        <div class="report-section card mb-4">
+            <div class="card-body">
+                {% if clinic_data and clinic_data.animals %}
+                    <div class="table-responsive">
+                        <table class="table table-striped table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Animal</th>
+                                    <th>Espécie</th>
+                                    <th>Tutor</th>
+                                    <th>Procedimento</th>
+                                    <th>Data Agendamento</th>
+                                    <th>Token</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for animal in clinic_data.animals %}
+                                <tr>
+                                    <td>{{ animal.nome }}</td>
+                                    <td>{{ animal.especie }}</td>
+                                    <td>{{ animal.dono.username if animal.dono else 'N/A' }}</td>
+                                    <td>{{ animal.procedimento }}</td>
+                                    <td>{{ animal.agendamento }}</td>
+                                    <td>{{ animal.verification_token if animal.verification_token else '-' }}</td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                {% else %}
+                    <div class="alert alert-info" role="alert">
+                        Nenhum atendimento concluído para sua clínica.
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    {% endif %}
+</div>
+{% endblock %}

@@ -1,0 +1,62 @@
+/* app_vet/static/css/schedule.css */
+
+.form-container {
+    background-color: #fff;
+    padding: 2.5rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 500px; /* Adjust width as needed */
+    box-sizing: border-box;
+}
+
+.form-container h1 {
+    color: var(--primary-color);
+    font-weight: 700;
+    font-size: 2rem;
+    margin-bottom: 1rem;
+}
+
+.form-container .lead {
+    font-size: 1.1rem;
+    color: #555;
+    margin-bottom: 2rem;
+}
+
+.form-label {
+    font-weight: 500;
+    color: #333;
+}
+
+.btn-primary {
+    font-weight: 600;
+    padding: 0.75rem 1.5rem;
+    font-size: 1.1rem;
+}
+
+.cancel-link {
+    display: inline-block;
+    color: var(--primary-color);
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.cancel-link:hover {
+    text-decoration: underline;
+}
+
+/* Responsive adjustments */
+@media (max-width: 576px) {
+    .form-container {
+        padding: 1.5rem;
+        margin: 1rem;
+    }
+
+    .form-container h1 {
+        font-size: 1.5rem;
+    }
+
+    .form-container .lead {
+        font-size: 1rem;
+    }
+}

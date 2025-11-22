@@ -1,4 +1,7 @@
-from main import app, db, models
+from . import create_app, db
+from models import User
+
+app = create_app()
 
 def init_db():
     """Inicializa o banco de dados e cria o usuário admin se necessário."""
@@ -6,8 +9,8 @@ def init_db():
         db.create_all()
 
         # Adicionar dados iniciais (admin) se não existirem
-        if not models.User.query.filter_by(username='admin').first():
-            admin_user = models.User(username='admin', role='admin')
+        if not User.query.filter_by(username='admin').first():
+            admin_user = User(username='admin', role='admin')
             admin_user.set_password('admin')
             db.session.add(admin_user)
             db.session.commit()

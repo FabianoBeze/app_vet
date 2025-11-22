@@ -1,0 +1,22 @@
+/* app_vet/static/css/user_dashboard.css */
+
+/* Custom styles for user dashboard specific elements */
+/* For example, if you had a specific card for animal details */
+.animal-card {
+    background-color: #fff;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin-bottom: 1rem;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+
+.animal-card h5 {
+    color: var(--primary-color);
+    margin-bottom: 0.75rem;
+}
+
+.animal-card p {
+    font-size: 0.95rem;
+    line-height: 1.5;
+}

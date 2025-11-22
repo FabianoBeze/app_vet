@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+
+{% block title %}User Dashboard - Vet App{% endblock %}
+
+{% block content %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/user_dashboard.css') }}">
+<div class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1>Bem-vindo(a), {{ user.username }}!</h1>
+        <div>
+            <a href="{{ url_for('main.register_animal') }}" class="btn btn-primary me-2">Cadastrar Novo Animal</a>
+            <a href="{{ url_for('main.logout') }}" class="btn btn-outline-secondary">Logout</a>
+        </div>
+    </div>
+
+    <h2 class="mb-3">Seus Animais Cadastrados</h2>
+    {% if animals %}
+        <div class="table-responsive">
+            <table class="table table-striped table-hover">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nome</th>
+                        <th>Espécie</th>
+                        <th>Status</th>
+                        <th>Token</th>
+                        <th>Dono</th>
+                        <th>Clínica</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for animal in animals %}
+                    <tr>
+                        <td>{{ animal.id }}</td>
+                        <td>{{ animal.nome }}</td>
+                        <td>{{ animal.especie }}</td>
+                        <td>{{ animal.status }}</td>
+                        <td>{{ animal.verification_token or 'N/A' }}</td>
+                        <td>{{ animal.dono.username if animal.dono else 'N/A' }}</td>
+                        <td>{{ animal.clinic.name if animal.clinic else 'Aguardando atribuição' }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    {% else %}
+        <div class="alert alert-info" role="alert">
+            Você ainda não cadastrou nenhum animal.
+            <a href="{{ url_for('main.register_animal') }}" class="alert-link">Cadastrar agora.</a>
+        </div>
+    {% endif %}
+</div>
+{% endblock %}

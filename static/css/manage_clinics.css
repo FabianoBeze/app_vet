@@ -1,0 +1,96 @@
+/* app_vet/static/css/manage_clinics.css */
+
+.table-container {
+    background-color: #fff;
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    margin-top: 2rem; /* Add some top margin for spacing */
+    margin-bottom: 2rem;
+}
+
+.table-container h1 {
+    color: var(--primary-color);
+    font-size: 2.2rem;
+    font-weight: 700;
+    margin: 0;
+}
+
+.table-container hr {
+    margin-top: 1.5rem;
+    margin-bottom: 1.5rem;
+    border-top: 1px solid #eee;
+}
+
+/* Ensure table cells have appropriate padding */
+.table th, .table td {
+    padding: 0.8rem;
+    vertical-align: middle;
+}
+
+.action-links a {
+    margin-right: 1rem;
+    color: var(--primary-color);
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.action-links a:hover {
+    text-decoration: underline;
+}
+
+/* Adjustments for buttons at the top */
+.btn-primary, .btn-secondary {
+    font-weight: 600;
+    padding: 0.6rem 1.2rem;
+    font-size: 0.95rem;
+}
+
+.btn-secondary {
+    background-color: #6c757d;
+    border-color: #6c757d;
+}
+
+.btn-secondary:hover {
+    background-color: #5a6268;
+    border-color: #545b62;
+}
+
+/* Specific styling for buttons within tables */
+.table .btn-sm {
+    padding: 0.25rem 0.5rem;
+    font-size: 0.875rem;
+    line-height: 1.5;
+    border-radius: 0.2rem;
+}
+
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .table-container {
+        padding: 1.5rem;
+        margin-left: 1rem;
+        margin-right: 1rem;
+    }
+
+    .table-container h1 {
+        font-size: 1.8rem;
+    }
+
+    .d-flex.justify-content-between.align-items-center {
+        flex-direction: column;
+        align-items: flex-start !important;
+    }
+
+    .d-flex.justify-content-between.align-items-center > div {
+        margin-top: 1rem;
+        width: 100%;
+        display: flex;
+        justify-content: space-around;
+    }
+
+    .d-flex.justify-content-between.align-items-center > div .btn {
+        flex: 1;
+        margin: 0 0.5rem;
+    }
+}

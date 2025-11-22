@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+
+{% block title %}Agendar Atendimento - Vet App{% endblock %}
+
+{% block content %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/schedule.css') }}">
+<div class="container d-flex justify-content-center align-items-center min-vh-100">
+    <div class="form-container">
+        <div class="text-center mb-4">
+            <h1>Agendar Atendimento para {{ animal.nome }}</h1>
+            <p class="lead"><strong>Dono:</strong> {{ animal.dono.username }} | <strong>Contato:</strong> {{ animal.contato }}</p>
+        </div>
+
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="alert alert-{{ category }}">{{ message }}</div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+
+        <form method="POST">
+            <div class="mb-3">
+                <label for="data_agendamento" class="form-label">Data e Hora do Agendamento:</label>
+                <input type="datetime-local" class="form-control" id="data_agendamento" name="data_agendamento" required>
+            </div>
+            <button type="submit" class="btn btn-primary w-100">Agendar</button>
+        </form>
+        <div class="links text-center mt-3">
+            <a href="{{ url_for('main.clinic_dashboard') }}" class="cancel-link">Cancelar</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,108 @@
+/* app_vet/static/css/admin_dashboard.css */
+
+.dashboard-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid #eee;
+}
+
+.dashboard-header h1 {
+    color: var(--primary-color);
+    font-size: 2.2rem;
+    font-weight: 700;
+    margin: 0;
+}
+
+.dashboard-nav a {
+    margin-left: 1.5rem;
+    color: var(--primary-color);
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+.dashboard-nav a:hover {
+    color: var(--secondary-color);
+}
+
+.welcome-message {
+    font-size: 1.1rem;
+    margin-bottom: 2rem;
+    color: #555;
+}
+
+.charts-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    margin-bottom: 3rem;
+    justify-content: center;
+}
+
+.chart-card {
+    background-color: #fff;
+    padding: 1.5rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    flex: 1; /* Allow cards to grow and shrink */
+    min-width: 300px; /* Minimum width before wrapping */
+    max-width: 500px;
+}
+
+.table-container {
+    background-color: #fff;
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    margin-bottom: 2rem;
+}
+
+.table-container h2 {
+    color: var(--primary-color);
+    font-size: 1.8rem;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+}
+
+/* Ensure table cells have appropriate padding */
+.table th, .table td {
+    padding: 0.8rem;
+    vertical-align: middle;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .dashboard-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .dashboard-header h1 {
+        margin-bottom: 1rem;
+    }
+
+    .dashboard-nav {
+        width: 100%;
+        display: flex;
+        justify-content: space-around;
+        margin-left: 0;
+    }
+
+    .dashboard-nav a {
+        margin: 0 0.5rem;
+    }
+
+    .charts-container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .chart-card {
+        width: 100%;
+        max-width: 100%; /* Full width on small screens */
+    }
+}
+

@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block title %}Editar Clínica - Vet App{% endblock %}
+
+{% block content %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/edit_clinic.css') }}">
+<div class="form-container">
+    <h1>Editar Clínica</h1>
+    <form method="post">
+        <div class="mb-3">
+            <label for="name" class="form-label">Nome da Clínica:</label>
+            <input type="text" class="form-control" id="name" name="name" value="{{ clinic.name }}" required>
+        </div>
+        <div class="mb-3">
+            <label for="contact" class="form-label">Contato:</label>
+            <input type="text" class="form-control" id="contact" name="contact" value="{{ clinic.contact }}" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Salvar Alterações</button>
+    </form>
+    <a href="{{ url_for('main.manage_clinics') }}" class="cancel-link">Cancelar</a>
+</div>
+{% endblock %}

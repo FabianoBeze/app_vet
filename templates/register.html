@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block title %}Register - Vet App{% endblock %}
+
+{% block content %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/register.css') }}">
+<div class="container d-flex justify-content-center align-items-center min-vh-100">
+    <div class="register-container">
+        <div class="register-header text-center mb-4">
+            <h2>Cadastro de Novo Usuário</h2>
+        </div>
+        
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="alert alert-{{ category }}">{{ message }}</div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+
+        <form method="post">
+            <div class="form-floating mb-3">
+                <input type="text" class="form-control" id="username" name="username" placeholder="Nome de usuário" required>
+                <label for="username">Nome de usuário</label>
+            </div>
+            <div class="form-floating mb-3">
+                <input type="password" class="form-control" id="password" name="password" placeholder="Senha" required>
+                <label for="password">Senha</label>
+            </div>
+            <button type="submit" class="btn btn-primary w-100">Cadastrar</button>
+        </form>
+
+        <div class="links text-center mt-3">
+            <a href="{{ url_for('main.login') }}">Já tem conta? Faça Login</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

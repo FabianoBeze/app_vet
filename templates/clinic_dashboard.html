@@ -1,0 +1,93 @@
+{% extends "base.html" %}
+
+{% block title %}Painel da Clínica - Vet App{% endblock %}
+
+{% block content %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/clinic_dashboard.css') }}">
+
+<div class="dashboard-header">
+    <h1>Painel da Clínica: {{ clinic_name }}</h1>
+    <div class="dashboard-nav">
+        <a href="{{ url_for('main.reports') }}">Ver Relatórios</a>
+        <a href="{{ url_for('main.logout') }}">Logout</a>
+    </div>
+</div>
+
+<p class="welcome-message">Bem-vindo, <strong>{{ user.username }}</strong>!</p>
+
+<div class="table-container">
+    <h2>Seus Atendimentos</h2>
+    <table class="table table-striped table-hover">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nome</th>
+                <th>Espécie</th>
+                <th>Procedimento</th>
+                <th>Status</th>
+                <th>Token</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for animal in clinic_animals %}
+            <tr>
+                <td>{{ animal.id }}</td>
+                <td>{{ animal.nome }}</td>
+                <td>{{ animal.especie }}</td>
+                <td>{{ animal.procedimento }}</td>
+                <td>{{ animal.status }}</td>
+                <td>{{ animal.verification_token or 'N/A' }}</td>
+                <td>
+                    {% if animal.status == 'Aguardando agendamento' %}
+                    <a href="{{ url_for('main.schedule', animal_id=animal.id) }}" class="btn btn-sm btn-info">Agendar</a>
+                    {% elif animal.status == 'Agendado' %}
+                    <form method="POST" action="{{ url_for('main.mark_as_complete', animal_id=animal.id) }}" style="display:inline;">
+                        <button type="submit" class="btn btn-sm btn-success">Marcar como Concluído</button>
+                    </form>
+                    {% endif %}
+                </td>
+            </tr>
+            {% else %}
+            <tr>
+                <td colspan="7" class="text-center">Nenhum animal em atendimento.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+<div class="table-container">
+    <h2>Animais Disponíveis para Atendimento</h2>
+    <table class="table table-striped table-hover">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nome</th>
+                <th>Espécie</th>
+                <th>Procedimento</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for animal in available_animals %}
+            <tr>
+                <td>{{ animal.id }}</td>
+                <td>{{ animal.nome }}</td>
+                <td>{{ animal.especie }}</td>
+                <td>{{ animal.procedimento }}</td>
+                <td>
+                    <form method="POST" action="{{ url_for('main.claim_animal', animal_id=animal.id) }}" style="display:inline;">
+                        <button type="submit" class="btn btn-sm btn-primary">Reivindicar</button>
+                    </form>
+                </td>
+            </tr>
+            {% else %}
+            <tr>
+                <td colspan="5" class="text-center">Nenhum animal disponível no momento.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

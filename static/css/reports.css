@@ -1,0 +1,62 @@
+/* app_vet/static/css/reports.css */
+
+.report-section {
+    background-color: #fff;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+
+.report-section .card-header {
+    background-color: var(--primary-color);
+    color: white;
+    font-weight: 600;
+    font-size: 1.2rem;
+    padding: 1rem 1.5rem;
+    border-bottom: 1px solid rgba(0,0,0,.125);
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+}
+
+.report-section .card-header h3 {
+    color: white;
+    margin: 0;
+    font-size: 1.2rem;
+}
+
+.report-section .card-body {
+    padding: 1.5rem;
+}
+
+/* Ensure table cells have appropriate padding */
+.table th, .table td {
+    padding: 0.8rem;
+    vertical-align: middle;
+}
+
+/* Specific styling for buttons (e.g., Voltar ao Dashboard) */
+.btn-secondary {
+    background-color: #6c757d;
+    border-color: #6c757d;
+    font-weight: 600;
+    padding: 0.6rem 1.2rem;
+    font-size: 0.95rem;
+}
+
+.btn-secondary:hover {
+    background-color: #5a6268;
+    border-color: #545b62;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .d-flex.justify-content-between.align-items-center {
+        flex-direction: column;
+        align-items: flex-start !important;
+    }
+
+    .d-flex.justify-content-between.align-items-center .btn {
+        width: 100%;
+        margin-top: 1rem;
+    }
+}

@@ -1,12 +1,7 @@
 from datetime import datetime
 from flask_login import UserMixin
 from werkzeug.security import generate_password_hash, check_password_hash
-try:
-    # import relative when used as package
-    from .extensions import db
-except Exception:
-    # fallback for direct execution/import
-    from extensions import db
+from extensions import db
 
 class User(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)

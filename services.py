@@ -1,10 +1,5 @@
-try:
-    from .extensions import db
-    from .models import User, Animal, Clinic
-except Exception:
-    from extensions import db
-    from models import User, Animal, Clinic
-
+from .extensions import db
+from .models import User, Animal, Clinic
 import random
 
 def generate_token():
@@ -28,10 +23,8 @@ def create_user(username, password, role='user', email=None, contact=None, clini
 def get_clinics():
     return Clinic.query.all()
 
-
 def get_clinic_by_id(clinic_id):
     return Clinic.query.get(clinic_id)
-
 
 def create_clinic(name, contact):
     clinic = Clinic(name=name, contact=contact)
@@ -39,13 +32,11 @@ def create_clinic(name, contact):
     db.session.commit()
     return clinic
 
-
 def create_animal(nome, especie, contato, procedimento, dono_id, status='Aguardando'):
     animal = Animal(nome=nome, especie=especie, contato=contato, procedimento=procedimento, dono_id=dono_id, status=status)
     db.session.add(animal)
     db.session.commit()
     return animal
-
 
 def assign_clinic_to_animal(animal_id, clinic_id):
     animal = Animal.query.get(animal_id)
@@ -54,7 +45,6 @@ def assign_clinic_to_animal(animal_id, clinic_id):
     animal.clinic_id = clinic_id
     db.session.commit()
     return animal
-
 
 def claim_animal_for_clinic(animal_id, clinic_id):
     """Try to claim (assign) an animal to a clinic in a safe way.
@@ -78,7 +68,6 @@ def claim_animal_for_clinic(animal_id, clinic_id):
         db.session.rollback()
         return None
 
-
 def schedule_animal(animal_id, dt):
     animal = Animal.query.get(animal_id)
     if not animal:
@@ -86,8 +75,7 @@ def schedule_animal(animal_id, dt):
     animal.data_agendamento = dt
     animal.status = 'Agendado'
     # gerar token numérico de 6 dígitos para verificação pelo tutor
-    import random
-    token = f"{random.randint(0, 999999):06d}"
+    token = generate_token()
     animal.verification_token = token
     animal.token_validated = False
     db.session.commit()

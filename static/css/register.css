@@ -1,0 +1,61 @@
+/* app_vet/static/css/register.css */
+
+.register-container {
+    background-color: #fff;
+    padding: 2.5rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 450px;
+    box-sizing: border-box; /* Ensures padding doesn't increase total width */
+}
+
+.register-header h2 {
+    color: var(--primary-color); /* Using primary color from style.css */
+    font-weight: 700;
+    font-size: 1.8rem;
+}
+
+/* Adjustments for Bootstrap form-floating labels */
+.form-floating > label {
+    color: #6c757d; /* Lighter color for placeholder */
+}
+
+.form-floating > .form-control:focus ~ label,
+.form-floating > .form-control:not(:placeholder-shown) ~ label {
+    color: var(--primary-color); /* Primary color when active/filled */
+}
+
+.btn-primary {
+    /* Inherits styles from style.css, ensure it looks good */
+    font-weight: 600;
+    padding: 0.75rem 1.5rem;
+    font-size: 1.1rem;
+}
+
+.links {
+    margin-top: 1.5rem;
+    font-size: 0.95rem;
+}
+
+.links a {
+    color: var(--primary-color);
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.links a:hover {
+    text-decoration: underline;
+}
+
+/* Responsive adjustments */
+@media (max-width: 576px) {
+    .register-container {
+        padding: 1.5rem;
+        margin: 1rem;
+    }
+
+    .register-header h2 {
+        font-size: 1.5rem;
+    }
+}

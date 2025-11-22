@@ -1,0 +1,116 @@
+{% extends "base.html" %}
+
+{% block title %}Admin Dashboard - Vet App{% endblock %}
+
+{% block content %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/admin_dashboard.css') }}">
+
+<div class="dashboard-header">
+    <h1>Dashboard do Administrador</h1>
+    <div class="dashboard-nav">
+        <a href="{{ url_for('main.manage_clinics') }}">Gerenciar Clínicas</a>
+        <a href="{{ url_for('main.reports') }}">Ver Relatórios</a>
+        <a href="{{ url_for('main.logout') }}">Logout</a>
+    </div>
+</div>
+
+<p class="welcome-message">Bem-vindo, <strong>{{ user.username }}</strong>!</p>
+
+<div class="charts-container">
+    <div class="chart-card">
+        <canvas id="procedimentosChart"></canvas>
+    </div>
+    <div class="chart-card">
+        <canvas id="statusChart"></canvas>
+    </div>
+</div>
+
+<div class="table-container">
+    <h2>Todos os Animais Cadastrados</h2>
+    <table class="table table-striped table-hover">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nome</th>
+                <th>Espécie</th>
+                <th>Status</th>
+                <th>Clínica</th>
+                <th>Token</th>
+                <th>Dono</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for animal in animals %}
+            <tr>
+                <td>{{ animal.id }}</td>
+                <td>{{ animal.nome }}</td>
+                <td>{{ animal.especie }}</td>
+                <td>{{ animal.status }}</td>
+                <td>{{ animal.clinic.name if animal.clinic else 'N/A' }}</td>
+                <td>{{ animal.verification_token or 'N/A' }}</td>
+                <td>{{ animal.dono.username if animal.dono else 'N/A' }}</td>
+            </tr>
+            {% else %}
+            <tr>
+                <td colspan="7" class="text-center">Nenhum animal cadastrado.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const procedimentosCtx = document.getElementById('procedimentosChart').getContext('2d');
+        new Chart(procedimentosCtx, {
+            type: 'pie',
+            data: {
+                labels: ['Castração', 'Consulta', 'Vacinação', 'Outros'],
+                datasets: [{
+                    label: 'Tipos de Atendimento',
+                    data: [{{ procedimento_counts.castração }}, {{ procedimento_counts.consulta }}, {{ procedimento_counts.vacinação }}, {{ procedimento_counts.outros }}],
+                    backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0']
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: 'top',
+                    },
+                    title: {
+                        display: true,
+                        text: 'Tipos de Procedimentos'
+                    }
+                }
+            }
+        });
+
+        const statusCtx = document.getElementById('statusChart').getContext('2d');
+        new Chart(statusCtx, {
+            type: 'pie',
+            data: {
+                labels: ['Concluído', 'Aguardando'],
+                datasets: [{
+                    label: 'Status dos Atendimentos',
+                    data: [{{ status_counts.Concluído }}, {{ status_counts.Aguardando }}],
+                    backgroundColor: ['#4CAF50', '#FF9800']
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: 'top',
+                    },
+                    title: {
+                        display: true,
+                        text: 'Status dos Atendimentos'
+                    }
+                }
+            }
+        });
+    });
+</script>
+{% endblock %}
