@@ -1,6 +1,13 @@
 # Sistema de Gerenciamento de Clínica Veterinária
 
-Este é um sistema web desenvolvido em Flask para gerenciar o cadastro de animais, clínicas e agendamentos de procedimentos. A aplicação foi refatorada para uma arquitetura modular e inclui funcionalidades de segurança, como a verificação de atendimentos por token.
+[![Python](https://img.shields.io/badge/Python-3.10%2B-3776AB?logo=python&logoColor=white)](https://www.python.org/)
+[![Flask](https://img.shields.io/badge/Flask-3.0-000000?logo=flask&logoColor=white)](https://flask.palletsprojects.com/)
+[![License: MIT](https://img.shields.io/badge/license-MIT-0f7a53)](LICENSE)
+
+Sistema web de código aberto (licença MIT), desenvolvido em Flask, para gerenciar o
+cadastro de animais, clínicas e agendamentos de procedimentos. A aplicação foi refatorada
+para uma arquitetura modular e inclui funcionalidades de segurança, como a verificação de
+atendimentos por token.
 
 ## Arquitetura
 
@@ -56,7 +63,9 @@ Para garantir a segurança e a comunicação correta, um token de 6 dígitos é 
     *   Python 3.x
     *   Instale as dependências (recomenda-se o uso de um ambiente virtual):
       ```bash
-      pip install Flask Flask-SQLAlchemy Flask-Login Werkzeug
+      python -m venv .venv
+      # Windows: .venv\Scripts\activate  |  Linux/macOS: source .venv/bin/activate
+      pip install -r requirements.txt
       ```
 
 2.  **Execução:**
@@ -80,3 +89,12 @@ Ao iniciar a aplicação pela primeira vez, um usuário administrador é criado:
     - **Senha:** `admin`
 
 Novos usuários (tutores de animais) e clínicas devem ser cadastrados através da interface da aplicação pelo administrador.
+
+## Contribuição
+
+Sugestões e issues são bem-vindas. Para enviar código, abra uma branch a partir da `main`,
+descreva a mudança e envie um pull request.
+
+## Licença
+
+Distribuído sob a licença **MIT**. Veja [`LICENSE`](LICENSE).
